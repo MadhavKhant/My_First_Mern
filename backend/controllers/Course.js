@@ -59,6 +59,7 @@ exports.CreateCourse = async (req, res) => {
 				message: "Category Details Not Found",
 			});
 		}
+        
 
         if(!Status)
         {
@@ -81,8 +82,17 @@ exports.CreateCourse = async (req, res) => {
             Thumbnail: thumbnailImage.secure_url,
             Status: Status,
             Instructions: Instructions
-            
         });
+
+        const AddCourseIdinChoosenCategory = await Category.findByIdAndUpdate(
+            Categoryid,
+            {
+                $push:{
+                    Course: NewCourse._id
+                }
+            },
+            {new: true}
+        )
 
         console.log("Created course from backend:", NewCourse);
 

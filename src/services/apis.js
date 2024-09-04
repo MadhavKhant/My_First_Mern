@@ -1,7 +1,7 @@
-//const BASE_URL = process.env.REACT_APP_BASE_URL;
+const BASE_URL = process.env.REACT_APP_BASE_URL;
 
 
-const BASE_URL =  "http://localhost:4000/api/v1";
+//const BASE_URL =  "http://localhost:4000/api/v1";
 //const BASE_URL = "https://my-first-mern-e2wk.onrender.com/api/v1"
 
 console.log("BAsee... url: ", BASE_URL);
@@ -63,7 +63,7 @@ export const categories = {
 
 // CATALOG PAGE DATA
 export const catalogData = {
-  CATALOGPAGEDATA_API: BASE_URL + "/course/getCategoryPageDetails",
+  CATALOGPAGEDATA_API: BASE_URL + "/course/CategoryPageDetails",
 }
 // CONTACT-US API
 export const contactusEndpoint = {

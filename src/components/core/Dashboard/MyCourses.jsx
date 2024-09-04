@@ -36,7 +36,7 @@ const MyCourses = () => {
     },[])
 
   return (
-    <div>
+    <div className='ml-[30%] w-[800px]'>
         <div className="mb-14 flex items-center justify-between gap-10 ml-5 mt-10">
             <h1 className="text-3xl font-medium text-richblack-5">My Courses</h1>
             <buttton onClick={() => navigate("/dashboard/add-course")}
@@ -48,7 +48,9 @@ const MyCourses = () => {
             </buttton>
         </div>
 
-        {courses && <CourseTable courses={courses} setCourses={setCourses} />}
+        <div className='w-full '>
+            {courses && <CourseTable courses={courses} setCourses={setCourses} />}
+        </div>
     </div>
   )
 }

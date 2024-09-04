@@ -6,30 +6,52 @@ import { RiArrowDownSLine } from "react-icons/ri";
 import {AiOutlineShoppingCart} from "react-icons/ai"
 import { useSelector } from 'react-redux';
 import ProfileDropDown from '../core/Auth/ProfileDropDown'
+import { useState } from 'react';
+import { apiConnector } from '../../services/apiconnector';
+import { useEffect } from 'react';
+import { categories } from '../../services/apis';
+import {BsChevronDown} from 'react-icons/bs'
 
-const subLinks = [
-    {
-        title: "python",
-        link:"/catalog/python"
-    },
-    {
-        title: "web dev",
-        link:"/catalog/web-development"
-    },
-];
+// const subLinks = [
+//     {
+//         title: "python",
+//         link:"/catalog/python"
+//     },
+//     {
+//         title: "web dev",
+//         link:"/catalog/web-development"
+//     },
+// ];
 
 
 const Navbar = () => {
 
+    const [subLinks, setSubLinks] = useState([])
     const {token} = useSelector((state) => state.auth);
     const {user} = useSelector((state) => state.profile);
     const {totalItems} = useSelector((state) => state.cart);
+    const [loading, setLoading] = useState(false)
 
     const location = useLocation();
     const data = NavbarLinks;
     const matchRoute = (route) => {
         return matchPath({path:route}, location.pathname);
     }
+
+    useEffect(() => {
+        (async () => {
+          setLoading(true)
+          try {
+            const res = await apiConnector("GET", categories.CATEGORIES_API)
+            setSubLinks(res.data.data)
+          } catch (error) {
+            console.log("Could not fetch Categories.", error)
+          }
+          setLoading(false)
+        })()
+      }, [])
+
+
 
   return (
     <div className='w-full flex justify-center items-start bg-richblack-800 border-b-2 border-richblack-700'>
@@ -49,36 +71,40 @@ const Navbar = () => {
                                 {
                                     ele.title === "Catalog" ? 
                                     (
-                                        <div className='flex group items-center gap-x-1'>
-
-                                            <p className='text-richblack-5'>{ele.title}</p>
-                                            <RiArrowDownSLine className=' text-white'/>
-
-                                            <div className='invisible absolute left-[50%]
-                                                    translate-x-[-62%] 
-                                                top-[10%]
-                                                flex flex-col rounded-md bg-richblack-5 p-4 text-richblack-900
-                                                opacity-0 transition-all duration-200 group-hover:visible
-                                                group-hover:opacity-100 lg:w-[300px] gap-3 item-center justify-center'>
-
-                                                <div className='absolute left-[50%] top-0
-                                                translate-x-[80%] 
-                                                translate-y-[-45%] h-6 w-6 rotate-45 rounded bg-richblack-5'>
-                                                </div>
-
-                                                    {
-                                                        subLinks.length ? (
-                                                                subLinks.map( (subLink, index) => (
-                                                                    <Link to={`${subLink.link}`} key={index}
-                                                                    className=' text-center text-[24px] rounded-full bg-richblack-500 p-1 scale-95 mt-1 font-bold gap-3'>
-                                                                        <p>{subLink.title}</p>
-                                                                    </Link>
-                                                                ) )
-                                                        ) : (<div></div>)
-                                                    }
-                                                </div>
-
-                                        </div>
+                                        <>
+                                            <div
+                                            className={`group relative flex cursor-pointer items-center gap-1 ${
+                                                matchRoute("/Catalog/:CatalogName")
+                                                ? "text-yellow-25"
+                                                : "text-richblack-25"
+                                            }`}
+                                            >
+                                            <p>{ele.title}</p>
+                                            <BsChevronDown />
+                                            <div className="invisible bg-richblack-5  absolute left-[50%] top-[50%] z-[1000] flex w-[200px] translate-x-[-50%] translate-y-[3em] flex-col rounded-lg  p-4  opacity-0 transition-all duration-150 group-hover:visible group-hover:translate-y-[1.65em] group-hover:opacity-100 lg:w-[300px]">
+                                                <div className="absolute left-[50%] top-0 -z-10 h-6 w-6 translate-x-[80%] translate-y-[-40%] rotate-45 select-none rounded bg-richblack-5"></div>
+                                                {loading ? (
+                                                <p className="text-center">Loading...</p>
+                                                ) : subLinks.length ? (
+                                                <>
+                                                    {subLinks
+                                                    .map((subLink, i) => (
+                                                        <Link
+                                                        to={`/Catalog/${subLink.Name
+                                                            }`}
+                                                        className="rounded-lg bg-transparent py-4 pl-4 hover:bg-richblack-50 text-black"
+                                                        key={i}
+                                                        >
+                                                        <p>{subLink.Name}</p>
+                                                        </Link>
+                                                    ))}
+                                                </>
+                                                ) : (
+                                                <p className="text-center">No Courses Found</p>
+                                                )}
+                                            </div>
+                                            </div>
+                                        </>
                                     )
                                     : (
                                         <Link to={ele.path}>

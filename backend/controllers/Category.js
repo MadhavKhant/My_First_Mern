@@ -40,12 +40,12 @@ exports.CreateCategory = async (req, res) => {
 exports.GetAllCategories = async (req, res) => {
     try{
 
-        const alltags = await Category.find({}, {Name: true, Description: true});
+        const data = await Category.find({}, {Name: true, Description: true});
 
         return res.status(200).json({
             success: true,
             message: 'All CAtegories return successfully',
-            alltags
+            data
         })
     }
     catch(e){
@@ -63,14 +63,28 @@ exports.CategoryPageDetails = async (req, res) => {
             const {CategoryId} = req.body;
             //get courses for specified categoryId
             const selectedCategory = await Category.findById(CategoryId)
-                                            .populate("Course")
+                                            .populate({
+                                                path:"Course",
+                                                match: {Status: "Published"},
+                                                populate:{
+                                                    path:"Instructor"
+                                                }
+                                            })
                                             .exec();
+
             //validation
             if(!selectedCategory) {
                 return res.status(404).json({
                     success:false,
-                    message:'Data Not Found',
+                    message:'Data Not Found for selectedCAtegory',
                 });
+            }
+
+            if(selectedCategory.Course.length === 0){
+                return res.status(400).json({
+                    success: false,
+                    message:'No Courses found for this Category'
+                })
             }
 
             //get coursesfor different categories

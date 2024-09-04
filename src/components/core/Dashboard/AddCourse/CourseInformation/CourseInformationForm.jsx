@@ -25,10 +25,9 @@ const CourseInformationForm = () => {
         const getCategories = async () => {
             setLoading(true)
             const categoriesData = await fetchCourseCategories();
-            console.log("fetch Course Categories in CourseInformation: ", categoriesData);
             
-            if(categoriesData.alltags.length > 0){
-                setCourseCategories(categoriesData.alltags);
+            if(categoriesData.data.length > 0){
+                setCourseCategories(categoriesData.data);
             }
             setLoading(false);
         }

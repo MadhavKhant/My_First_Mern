@@ -36,7 +36,7 @@ router.post("/deleteSubSection", auth, isInstructor, DeleteSubSection);
 //                                      Category routes (Only by Admin)
 // ********************************************************************************************************
 
-router.post("/CreateCategory", auth, isAdmin, CreateCategory);
+router.post("/CreateCategory", auth,isInstructor, CreateCategory);
 router.get("/showAllCategories", GetAllCategories);
 router.post("/CategoryPageDetails", CategoryPageDetails);
 

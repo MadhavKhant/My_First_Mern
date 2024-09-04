@@ -25,18 +25,19 @@ const RenderSteps = () => {
     ]
 
   return (
-    <div className='flex gap-[50px] flex-col mx-auto'>
+    <div className='flex gap-[50px] flex-col w-fit mx-auto '>
 
         {/* first Section  */}
-        <div className='flex flex-col gap-4 border-richblack-25 border-2 rounded-lg itmes-center justify-center'>
+        <div className='flex flex-col gap-4 rounded-lg itmes-center justify-center'>
             <div className='flex justify-between gap-[200px] w-full'>
                 {
                     steps.map((ele, index) => {
                         return (
                             <div key={index}
                                 className={`
-                                ${step === ele.id ? "text-yellow-50 bg-yellow-700 border-yellow-50 border-[0.5px] text-semibold px-3 py-1 rounded-full" :
-                                "border-richblack-700 text-richblack-300 px-3 "}
+                                ${step === ele.id ? "text-yellow-50 bg-yellow-700 border-yellow-50 border-[0.5px] text-semibold px-3 py-1 rounded-full" 
+                                :
+                                "border-richblack-700 text-white font-bold px-3 rounded-full"}
                                 `}
                             >
                             {
@@ -51,7 +52,7 @@ const RenderSteps = () => {
                     })
                 }
             </div>
-            <div className='flex justify-between w-[98%]'>
+            {/* <div className='flex justify-between w-[98%]'>
                 {
                     steps.map((ele, index) => {
                         return (
@@ -59,7 +60,7 @@ const RenderSteps = () => {
                         )
                     })
                 }
-            </div>
+            </div> */}
         </div>
 
 
