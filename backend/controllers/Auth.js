@@ -338,18 +338,14 @@ exports.Login = async (req, res) => {
             const token = jwt.sign(payload, process.env.JWT_SECRET, {
                 expiresIn: "2h",
             });
-
             user.token = token;
-            console.log("\n\nuserexist in login :", user);
-            console.log("\n\nToken is: ", token);
 
             //console.log("password of user is: ", userexist.Password);
             user.Password = undefined;
-
             const option = {
                 expires: new Date(Date.now() + 3*24*60*60*1000) //3 days
             }
-    
+
             //create cookie and send response
             res.cookie("token", token, option).status(200).json({
                 success: true,
