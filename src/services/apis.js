@@ -1,7 +1,7 @@
-const BASE_URL = process.env.REACT_APP_BASE_URL;
-console.log("Base URL:", BASE_URL);
+//const BASE_URL = process.env.REACT_APP_BASE_URL;
 
-//const BASE_URL =  "http://localhost:4000/api/v1";
+
+const BASE_URL =  "http://localhost:4000/api/v1";
 //const BASE_URL = "https://my-first-mern-e2wk.onrender.com/api/v1"
 
 console.log("BAse url: ", BASE_URL);
