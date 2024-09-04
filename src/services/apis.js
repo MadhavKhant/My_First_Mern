@@ -4,7 +4,7 @@
 const BASE_URL =  "http://localhost:4000/api/v1";
 //const BASE_URL = "https://my-first-mern-e2wk.onrender.com/api/v1"
 
-console.log("BAsee url: ", BASE_URL);
+console.log("BAsee... url: ", BASE_URL);
 
 // AUTH ENDPOINTS
 export const endpoints = {
