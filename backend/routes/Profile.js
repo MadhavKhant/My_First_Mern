@@ -9,7 +9,7 @@ const {UpdateProfile, DeleteAccount, GetUserDetails, GetEnrolledCourses, UpdateD
 router.put("/UpdateProfile", auth, UpdateProfile)
 router.delete("/DeleteProfile", auth, DeleteAccount)
 router.get("/GetUserDetails", auth, GetUserDetails)
-router.get("/GetEnrolledCourses", auth, GetEnrolledCourses)
+router.get("/getEnrolledCourses", auth, GetEnrolledCourses)
 router.put("/UpdateDisplayPicture", auth, UpdateDisplayPicture)
 
 module.exports = {ProfileRoute: router};

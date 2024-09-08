@@ -122,8 +122,7 @@ export function login(Email, Password, navigate) {
 }
 
 export function logout(navigate) {
-  console.log("entered in logout");
-  console.log("navigate: ", navigate)
+
   return (dispatch) => {
     dispatch(setToken(null))
     dispatch(setUser(null))

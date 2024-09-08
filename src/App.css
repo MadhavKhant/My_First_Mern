@@ -10,6 +10,10 @@ html, body {
     background: url("../src/assets/Images/bghome.svg");
 }
 
+.blackButton {
+  @apply cursor-pointer rounded-md bg-richblack-800 px-[20px] py-[8px] font-semibold text-richblack-5;
+}
+
 /* https://10015.io/tools/css-loader-generator */
 .spinner {
     width: 56px;

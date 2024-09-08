@@ -6,13 +6,12 @@ const User = require("../models/User");
 exports.auth = async (req, res, next) => {
     try{
 
-        console.log("\nentered in middleware auth");
+        
         
         //extract token
         const token = req.cookies.token || req.body.token || req.header("Authorization").replace("Bearer ", "");
 
-        console.log("\nToken is: ", token);
-
+       
         //if token is missing then return response
         if(!token)
         {
@@ -24,9 +23,8 @@ exports.auth = async (req, res, next) => {
 
         //verify of token
         try{
-            console.log("Verifying token");
+            
             const decode = await jwt.verify(token, process.env.JWT_SECRET);
-            console.log("\ndecode is : ", decode);
             req.user = decode;
         }
         catch(e)

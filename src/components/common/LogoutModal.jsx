@@ -5,7 +5,7 @@ const LogoutModal = ({modalData}) => {
   const { text1, text2, btnT1, btnT2, btnH1, btnH2 } = modalData;
 
   return (
-    <div className='w-screen h-screen border-2 border-richblack-25 mx-auto p-2 z-50 inset-0
+    <div className='h-full w-full min-w-[1400px] min-h-[500px] border-2 border-richblack-25 mx-auto p-2 z-50 inset-0
         absolute top-[0%] left-[0%] right-[0%] bottom-[0%] flex items-center bg-richblack-700 bg-opacity-[95%]'>
 
         <div className='flex flex-col w-fit h-fit rounded-3xl mx-auto gap-4 border-2 

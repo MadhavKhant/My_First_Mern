@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { FaCheck } from 'react-icons/fa';
 import CourseInformationForm from './CourseInformation/CourseInformationForm'
@@ -8,6 +8,7 @@ import PublishCourse from './PublishCourse';
 const RenderSteps = () => {
 
     const {step} = useSelector((state) => state.course);
+    const {course} = useSelector((state) => state.course);
 
     const steps = [
         {
@@ -24,8 +25,10 @@ const RenderSteps = () => {
         }
     ]
 
+
+
   return (
-    <div className='flex gap-[50px] flex-col w-fit mx-auto '>
+    <div className='flex gap-[50px] flex-col w-[125%] mx-auto translate-x-[5%]'>
 
         {/* first Section  */}
         <div className='flex flex-col gap-4 rounded-lg itmes-center justify-center'>

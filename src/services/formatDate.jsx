@@ -1,4 +1,6 @@
-export const formatDate = (dateString) => {
+import { formatProdErrorMessage } from "@reduxjs/toolkit"
+
+ const formatDate = (dateString) => {
     const options = { year: "numeric", month: "long", day: "numeric" }
     const date = new Date(dateString)
     const formattedDate = date.toLocaleDateString("en-US", options)
@@ -12,3 +14,5 @@ export const formatDate = (dateString) => {
   
     return `${formattedDate} | ${formattedTime}`
   }
+
+  export default formatDate

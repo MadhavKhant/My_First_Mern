@@ -81,8 +81,8 @@ const Catalog = () => {
                 {/* <CourseSlider Courses={catalogPageData?.data?.selectedCategory?.Course} /> */}
                 {
                     catalogPageData?.data?.selectedCategory.Course.map((ele, index) => (
-                        <div>
-                            <CourseCard key={index} Course={ele}/>
+                        <div key={index}>
+                            <CourseCard  Course={ele}/>
                         </div>
                     ))
                 }

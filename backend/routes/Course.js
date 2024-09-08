@@ -8,6 +8,7 @@ const { CreateSection, UpdateSection, DeleteSection } = require("../controllers/
 const { CreateSubSection, updateSubSection, DeleteSubSection } = require("../controllers/SubSection");
 const { CreateRatingAndReview, GetAverageRating, GetAllRatingAndReview } = require("../controllers/RatingAndReview");
 const { auth, isStudent, isInstructor, isAdmin } = require("../middlewares/auth");
+const {updateCourseProgress} = require("../controllers/CourseProgress");
 
 // ********************************************************************************************************
 //                                      Course routes
@@ -17,10 +18,14 @@ const { auth, isStudent, isInstructor, isAdmin } = require("../middlewares/auth"
 router.post("/createCourse", auth, isInstructor, CreateCourse);
 router.post("/UpdateCourse", auth, isInstructor, UpdateCourse);
 router.delete("/deleteCourse", auth, isInstructor, DeleteCourse);
-router.post("/getFullCourseDetails", GetCourseDetails);
+router.post("/getFullCourseDetails", auth, GetCourseDetails);
+router.post("/getCourseDetails", auth, GetCourseDetails)
 router.get("/getAllCourses", GetAllCourses);
 router.get("/getInstructorCourses", auth, isInstructor, getInstructorCourses)
 router.get("/TopThreeCourses", TopThreeCourses);
+
+//-----------------------CourseProgress------------------------------
+//router.post("/updateCourseProgress", auth, isStudent, updateCourseProgress)
 
 //-----------------Section----------------------------
 router.post("/addSection", auth, isInstructor, CreateSection);
@@ -31,6 +36,8 @@ router.post("/deleteSection", auth, isInstructor, DeleteSection);
 router.post("/addSubSection", auth, isInstructor, CreateSubSection);
 router.post("/updateSubSection", auth, isInstructor, updateSubSection);
 router.post("/deleteSubSection", auth, isInstructor, DeleteSubSection); 
+
+
 
 // ********************************************************************************************************
 //                                      Category routes (Only by Admin)

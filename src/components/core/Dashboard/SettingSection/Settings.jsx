@@ -3,7 +3,7 @@ import { MdOutlineKeyboardArrowLeft } from "react-icons/md";
 import { useSelector } from 'react-redux';
 import {  useNavigate } from 'react-router-dom';
 import { MdDelete } from "react-icons/md";
-import { DeleteAccount } from '../../../../services/operations/profileAPI';
+import { DeleteAccount } from '../../../../services/operations/SettingsAPI';
 import LogoutModal from '../../../common/LogoutModal';
 import { useDispatch } from 'react-redux';
 import ChangePass from './ChangePass';

@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux"
 import { useParams } from "react-router-dom";
 import RenderSteps from "../AddCourse/RenderSteps";
+import { getFullDetailsOfCourse } from "../../../../services/operations/CourseDetails";
+import { setCourse, setEditCourse } from "../../../../slices/courseSlice";
 
 
 export default function EditCourse(){
@@ -12,15 +14,37 @@ export default function EditCourse(){
     const {token} = useSelector((state) => state.auth);
     const dispatch = useDispatch();
 
-    if (loading) {
+
+
+      useEffect(() => {
+
+        const work = async () => {
+          setLoading(true);
+          try{
+            const res = await getFullDetailsOfCourse(CourseId, token);
+            
+            dispatch(setEditCourse(true));
+            dispatch(setCourse(res));
+
+            setLoading(false);
+          }
+          catch(e){
+            console.log(e);
+            setLoading(false);
+          }
+        }
+
+        work();
+
+      }, [])
+
+      if (loading) {
         return (
           <div className="grid flex-1 place-items-center">
             <div className="spinner"></div>
           </div>
         )
       }
-
-      
 
     return (
         <div>

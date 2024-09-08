@@ -2,6 +2,7 @@ const Course = require("../models/Course");
 const Category = require("../models/Category");
 const User = require("../models/User");
 const {UploadImageToCloudinary} = require("../utils/ImageUploader");
+const CourseProgress = require("../models/CourseProgress")
 
 
 //Create Course Handler function
@@ -9,7 +10,6 @@ exports.CreateCourse = async (req, res) => {
     try{
         
         //check for instructor as only instructor can create course
-        console.log("entered in CreateCourse backend:----------------");
         const userid_Instructor = req.user.id;
         const Instructor_Detail = await User.findById(userid_Instructor);
         
@@ -25,15 +25,15 @@ exports.CreateCourse = async (req, res) => {
         ///fetch data
         const {CourseName, CourseDescription, WhatYouWillLearn, Price, 
             //Tag,
-            Categoryid, Instructions} = req.body;
+        Categoryid, Instructions} = req.body;
         const thumbnail = req.files.Thumbnail;
         let {Status} = req.body;
 
         //validation
         if(!CourseName || !CourseDescription || !WhatYouWillLearn || !Price ||
             //|| !Tag || 
-                        !thumbnail 
-                        || !Categoryid || !Instructions)
+            !thumbnail 
+            || !Categoryid || !Instructions)
         {
             return res.status(400).json({
                 success: false,
@@ -160,6 +160,9 @@ exports.GetCourseDetails = async (req, res) => {
     try{
 
         const {courseId} = req.body;
+        console.log("req: ", req.user);
+
+        const userId = req.user.id;
 
         if(!courseId)
         {
@@ -187,6 +190,7 @@ exports.GetCourseDetails = async (req, res) => {
                                                 }
                                             })
                                             .exec();
+            
 
         //validation
         if(!course)
@@ -196,6 +200,11 @@ exports.GetCourseDetails = async (req, res) => {
                 message: `Course not found with id: ${courseId}`
             });
         }
+
+        const courseProgress = await CourseProgress.findOne({
+            courseId:courseId,
+            userId:userId,
+        })
 
         return res.status(200).json({
             success: true,
@@ -251,16 +260,10 @@ exports.TopThreeCourses = async (req, res) => {
 exports.UpdateCourse = async (req, res) => {
     try{
 
-        console.log("req.body of course: ", req.body);
-
-        const {CourseId, CourseName, CourseDescription, WhatYouWillLearn, Price, Tag, Categoryid, Instructions, CourseStatus} = req.body;
+        const {CourseId, CourseName, CourseDescription, WhatYouWillLearn, Price, Tag, Categoryid, Instructions, CourseStatus} = req.body
         const thumbnail = req.files ? req.files.ThumbnailImage : null;
 
-        console.log("All data feched");
-
         const course = await Course.findById(CourseId);
-
-        console.log("course:   :", course);
 
         if (!course) {
             return res.status(404).json({
@@ -278,10 +281,13 @@ exports.UpdateCourse = async (req, res) => {
         if (Instructions) course.Instructions = Instructions;
         if (CourseStatus) course.Status = CourseStatus;
 
-        console.log("before thumbnail");
-
-        if(thumbnail) await UploadImageToCloudinary(thumbnail, process.env.FOLDER_NAME);
         
+
+        if(thumbnail) {
+            const x = await UploadImageToCloudinary(thumbnail, process.env.FOLDER_NAME);
+            course.Thumbnail = x.secure_url;
+        }
+
 
         const updatedCourse = await course.save();
 

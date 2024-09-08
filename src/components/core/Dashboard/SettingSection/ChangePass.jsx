@@ -1,5 +1,5 @@
 import React from 'react'
-import { ChangePassword } from '../../../../services/operations/profileAPI'
+import { ChangePassword } from '../../../../services/operations/SettingsAPI'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'

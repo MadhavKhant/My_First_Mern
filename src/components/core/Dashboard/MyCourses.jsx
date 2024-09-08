@@ -15,14 +15,14 @@ const MyCourses = () => {
     //show instuctor courses on first render
     useEffect(() => {
 
-        console.log("Before courses in MyCourses: ", courses);
+       
 
         //fetch all courses
         const fetchCourses = async () => {
             setLoading(true);
 
             const result = await fetchInstructorCourses(token)
-            console.log("result from fetchInstructor Courses: ", result);
+            
             if(result){
                 setCourses(result)
             }
@@ -32,7 +32,7 @@ const MyCourses = () => {
 
         fetchCourses();
 
-        console.log("After courses in MyCourses: ", courses);
+        
     },[])
 
   return (

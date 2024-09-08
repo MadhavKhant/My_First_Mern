@@ -4,7 +4,7 @@ import { FaCheck } from "react-icons/fa"
 import { FiEdit2 } from "react-icons/fi"
 import { HiClock } from "react-icons/hi"
 import { RiDeleteBin6Line } from "react-icons/ri"
-import { formatDate } from '../../../../services/formatDate'
+import formatDate from '../../../../services/formatDate'
 import { COURSE_STATUS } from '../../../../utils/constants'
 import LogoutModal from '../../../common/LogoutModal'
 import { useDispatch } from 'react-redux'
@@ -36,9 +36,7 @@ const CourseTable = ({courses, setCourses}) => {
         setLoading(false)
       }
 
-      useEffect(() => {
-        console.log("courses in CourseTable: ", courses);
-      })
+
 
   return (
     <div>

@@ -21,6 +21,12 @@ import AddCourse from "./components/core/Dashboard/AddCourse/index";
 import MyCourses from "./components/core/Dashboard/MyCourses";
 import EditCourse from "./components/core/Dashboard/EditCourse";
 import Catalog from "./pages/Catalog";
+import CourseDetails from "./pages/CourseDetails";
+import Cart from "./components/core/Dashboard/Cart";
+import EnrolledCourses from "./components/core/Dashboard/EnrolledCourses";
+import ViewCourse from "./pages/ViewCourse";
+import VideoDetails from "./components/core/viewCourse/VideoDetails";
+
 
 
 
@@ -39,25 +45,55 @@ function App() {
       <Route path="/forgot-password" element={<OpenRoute><ForgotPassword /></OpenRoute>} />
       <Route path="/verify-email" element={<OpenRoute><VerifyEmail /></OpenRoute>} />
       <Route path="update-password/:id" element={<OpenRoute><UpdatePassword /></OpenRoute>} />
-      <Route path="/about" element={<OpenRoute><Aboutus /></OpenRoute>} />
-      <Route path="/contact" element={<OpenRoute><Contactus /></OpenRoute>} />
+      <Route path="/about" element={<Aboutus />} />
+      <Route path="/contact" element={<Contactus />} />
       <Route path="Catalog/:CatalogName" element={<Catalog/>} />
+      <Route path="courses/:courseId" element={<CourseDetails/>} />
+      
 
+      {/* Dashboard Routes */}
       <Route element={<PrivateRoute><Dashboard /></PrivateRoute>}>
         <Route path="dashboard/my-profile" element={<MyProfile />} />
         <Route path="dashboard/settings" element={<Settings />} />
-        {
-          user?.AccountType === ACCOUNT_TYPE.INSTRUCTOR && 
-          (
-            <>
-              <Route path="dashboard/add-course" element={<AddCourse />} />
-              <Route path="dashboard/my-courses" element={<MyCourses />} />
-              <Route path="dashboard/UpdateCourse/:CourseId" element={<EditCourse />} />
-            </>
-          )
-        }
+          {
+            user?.AccountType === ACCOUNT_TYPE.INSTRUCTOR && 
+            (
+              <>
+                <Route path="dashboard/add-course" element={<AddCourse />} />
+                <Route path="dashboard/my-courses" element={<MyCourses />} />
+                <Route path="dashboard/UpdateCourse/:CourseId" element={<EditCourse />} />
+              </>
+            )
+          }
+
+          {
+            user?.AccountType === ACCOUNT_TYPE.STUDENT && (
+              <>
+              <Route path="dashboard/cart" element={<Cart />} />
+              <Route path="dashboard/enrolled-courses" element={<EnrolledCourses />} />
+              </>
+            )
+          }
       </Route>
 
+      
+        <Route
+          element={
+            <PrivateRoute>
+              <ViewCourse/>
+            </PrivateRoute>
+          }
+        >
+          {
+            user?.AccountType === ACCOUNT_TYPE.STUDENT && (
+              <Route path="view-course/:courseId/section/:sectionId/sub-section/:subSectionId" element=<VideoDetails/>/>
+            )
+          }
+        </Route>
+        
+
+
+      {/* Other Routes */}
       <Route path="*" element={<Error />} />
     </Routes>
   </div>

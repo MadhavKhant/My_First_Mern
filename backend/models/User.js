@@ -72,7 +72,7 @@ const UserSchema = new mongoose.Schema(
 
         ResetPasswordExpires:{
             type: Date,
-        }
+        },
     },
     
     // Add timestamps for when the document is created and last modified

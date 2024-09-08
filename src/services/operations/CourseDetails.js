@@ -38,14 +38,22 @@ export const getAllCourses = async () => {
   return result
 }
 
-export const fetchCourseDetails = async (courseId) => {
+export const fetchCourseDetails = async (courseId, token) => {
   const toastId = toast.loading("Loading...")
   //   dispatch(setLoading(true));
   let result = null
   try {
-    const response = await apiConnector("POST", COURSE_DETAILS_API, {
-      courseId,
-    })
+    console.log("Entering::::", courseId);
+    const response = await apiConnector("POST", COURSE_DETAILS_API, 
+      {
+        courseId
+      }, 
+
+      {
+        Authorization: `Bearer ${token}`
+      }
+    )
+
     console.log("COURSE_DETAILS_API API RESPONSE............", response)
 
     if (!response.data.success) {

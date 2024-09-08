@@ -1,79 +1,64 @@
-import toast from "react-hot-toast";
-import { apiConnector } from "../apiconnector";
-import { setLoading } from "../../slices/authSlice";
-import { settingsEndpoints } from "../apis";
+import { toast } from "react-hot-toast"
 
+import { setLoading, setUser } from "../../slices/profileSlice"
+import { apiConnector } from "../apiconnector"
+import { profileEndpoints } from "../apis"
+import { logout } from "./authAPI"
 
+const { GET_USER_DETAILS_API, GET_USER_ENROLLED_COURSES_API } = profileEndpoints
 
-
-// UPDATE_PROFILE_API: BASE_URL + "/profile/updateProfile",
-// CHANGE_PASSWORD_API: BASE_URL + "/auth/changepassword",
-// DELETE_PROFILE_API: BASE_URL + "/profile/deleteProfile",
-
-
-const {
-    UPDATE_DISPLAY_PICTURE_API,
-    UPDATE_PROFILE_API,
-    CHANGE_PASSWORD_API,
-    DELETE_PROFILE_API
-} = settingsEndpoints
-
-
-export function DeleteAccount(navigate){
-    return async(dispatch) => {
-      console.log("entered in DeleteAccount in prrofileAPI");
-      console.log("api checking: ", DELETE_PROFILE_API);
-      dispatch(setLoading(true))
-      try{
-        console.log("entered in try block in delete account profileAPI")
-        const response = await apiConnector("DELETE", DELETE_PROFILE_API);
-        console.log("response of deleting account: ", response);
-        console.log("response.data.success", response.data.success);
-        if(!response.data.success){
-            throw new Error(response.data.message)
-        }
-
-        toast.success("Deleted Account Successfully");
-        navigate("/")
-      }
-      catch(e){
-        console.log("error in deleteing account in profileAPI error is: ", e);
-        console.log("e.message is: ", e.message);
-        
-        toast.error("Unable to delete Account")
-      }
-      dispatch(setLoading(false))
-    }
-   }
-
-
-export function ChangePassword(OldPassword, NewPassword, ConfirmNewPassword, navigate){
-  return async(dispatch) => {
-    console.log("enter in cha function");
-    console.log("data in function: ", OldPassword,   NewPassword, ConfirmNewPassword)
+export function getUserDetails(token, navigate) {
+  return async (dispatch) => {
+    const toastId = toast.loading("Loading...")
     dispatch(setLoading(true))
-    try{
+    try {
+      const response = await apiConnector("GET", GET_USER_DETAILS_API, null, {
+        Authorization: `Bearer ${token}`,
+      })
+      console.log("GET_USER_DETAILS API RESPONSE............", response)
 
-      // const response = await apiConnector("POST", CHANGE_PASSWORD_API, {OldPassword, NewPassword, ConfirmNewPassword})
-      const response = await apiConnector("POST", "/api/v1/auth/changepassword", {
-        OldPassword,
-        NewPassword,
-        ConfirmNewPassword
-    });
-
-      console.log("response from changepassword: ", response);
-
-      if(!response.data.success){
+      if (!response.data.success) {
         throw new Error(response.data.message)
       }
-
-      toast.success("Password Changed Successfully");
+      const userImage = response.data.data.image
+        ? response.data.data.image
+        : `https://api.dicebear.com/5.x/initials/svg?seed=${response.data.data.firstName} ${response.data.data.lastName}`
+      dispatch(setUser({ ...response.data.data, image: userImage }))
+    } catch (error) {
+      dispatch(logout(navigate))
+      console.log("GET_USER_DETAILS API ERROR............", error)
+      toast.error("Could Not Get User Details")
     }
-    catch(e){
-      console.log("error in changepassword:", e);
-      console.log("message of error:", e.message);
-      toast.error("Unnable to changepassword")
-    }
+    toast.dismiss(toastId)
     dispatch(setLoading(false))
   }
+}
+
+export async function getUserEnrolledCourses(token) {
+  const toastId = toast.loading("Loading...")
+  let result = []
+  try {
+    console.log("BEFORE Calling BACKEND API FOR Get ENROLLED COURSES");
+    const response = await apiConnector(
+      "GET",
+      GET_USER_ENROLLED_COURSES_API,
+      null,
+      {
+        Authorization: `Bearer ${token}`,
+      }
+    )
+    
+    console.log("GET_USER_ENROLLED_COURSES_API API RESPONSE............", response)
+
+    if (!response.data.success) {
+      throw new Error(response.data.message)
+    }
+    
+    result = response.data.data
+  } catch (error) {
+    console.log("GET_USER_ENROLLED_COURSES_API API ERROR............", error)
+    toast.error("Could Not Get Enrolled Courses")
+  }
+  toast.dismiss(toastId)
+  return result
 }
