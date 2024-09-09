@@ -35,7 +35,7 @@ const Home = () => {
                 <div className="flex flex-col lg:gap-[10px] sm:gap-[25px]  max-w-full items-center justify-between">
                     <div className=" h-[44px] w-full max-w-4/5 leading-none text-center traking-tight text-[36px]"
                             style={{ color: 'rgba(241, 242, 255, 1)' }}>
-                        Empower Your Future With <HighlightText text={"Coding Skills"} />
+                        EEEmpower Your Future With <HighlightText text={"Coding Skills"} />
                     </div>
                     <div className="  max-w-4/5 text-base flex items-center justify-center text-center"
                             style={{color: 'rgba(131, 136, 148, 1)'}}>
