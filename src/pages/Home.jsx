@@ -32,10 +32,10 @@ const Home = () => {
                     </Link>
                 </div>
 
-                <div className="flex flex-col lg:gap-[10px] sm:gap-[25px]  max-w-full items-center justify-between">
+                <div className="flex flex-col lg:gap-[10px] gap-[38px]  max-w-full items-center justify-between">
                     <div className=" h-[44px] w-full max-w-4/5 leading-none text-center traking-tight text-[36px]"
                             style={{ color: 'rgba(241, 242, 255, 1)' }}>
-                        EEEmpower Your Future With <HighlightText text={"Coding Skills"} />
+                        Empower Your Future With <HighlightText text={"Coding Skills"} />
                     </div>
                     <div className="  max-w-4/5 text-base flex items-center justify-center text-center"
                             style={{color: 'rgba(131, 136, 148, 1)'}}>
@@ -50,7 +50,7 @@ const Home = () => {
             </div>
 
             {/* video Section */}
-            <div className="flex justify-center items-center mt-10">
+            <div className="flex justify-center items-center mt-10 scale-[70%] lg:scale-[100%]">
                 <div className="shadow-blue-200 "
                     style={{
                         boxShadow: '10px 10px 0px 0px #F5F5F5'
@@ -62,43 +62,43 @@ const Home = () => {
             </div>
 
             {/* Code Typing Section */}
-            <div className="flex flex-col ">
+            <div className="flex flex-col translate-x-[-30%] lg:translate-x-0 lg:gap-12  gap-[300px]">
                 {/* Code Section 1 */}
                 <div className="mt-12 ml-[120px]">
                     <CodeBlocks 
-                    position={"flex-row-start"}
-                    heading={
-                        <div className="flex flex-col text-[28px]">
-                            <div className="flex gap-1">
-                                <span className="text-white ">Unlock your</span>
-                                <HighlightText text={"coding potential"}/>
+                        position={"flex-row"}
+                        heading={
+                            <div className="flex flex-col text-[28px]">
+                                <div className="flex gap-1">
+                                    <span className="text-white ">Unlock your</span>
+                                    <HighlightText text={"coding potential"}/>
+                                </div>
+                                <div className="text-white">with our online courses.</div>
                             </div>
-                            <div className="text-white">with our online courses.</div>
-                        </div>
-                    } 
-                    subheading={"Our courses are designed and taught by industry experts who have years of experience in coding and are passionate about sharing their knowledge with you."}
-                    ctabtn1={
-                        {
-                            active: true,
-                            Text: "Try it YourSelf",
-                            linkto: "/signup"
+                        } 
+                        subheading={"Our courses are designed and taught by industry experts who have years of experience in coding and are passionate about sharing their knowledge with you."}
+                        ctabtn1={
+                            {
+                                active: true,
+                                Text: "Try it YourSelf",
+                                linkto: "/signup"
+                            }
                         }
-                    }
-                    ctabtn2={
-                        {
-                            active: false,
-                            Text: "Learn More",
-                            linkto: "/login"
+                        ctabtn2={
+                            {
+                                active: false,
+                                Text: "Learn More",
+                                linkto: "/login"
+                            }
                         }
-                    }
 
-                    codeblock={`<!DOCTYPE html>\n<html>\n<head>\n<title>Example</title>\n<link rel="stylesheet" href="styles.css">\n</head>\n<body>\n<h1><a href="/">Header</a></h1>\n<nav><a href="one/">One</a><a href="two/">Two</a><a href="three/">Three</a></nav>\n</body>\n</html>`}
-                    codecolor={"text-yellow-25"}
+                        codeblock={`<!DOCTYPE html>\n<html>\n<head>\n<title>Example</title>\n<link rel="stylesheet" href="styles.css">\n</head>\n<body>\n<h1><a href="/">Header</a></h1>\n<nav><a href="one/">One</a><a href="two/">Two</a><a href="three/">Three</a></nav>\n</body>\n</html>`}
+                        codecolor={"text-yellow-25"}
                     />
                 </div>
 
                 {/* Code Section 2 */}
-                <div className="mt-12 ml-[120px]">
+                <div className="mt-12 ml-[120px] opacity-0 lg:opacity-100">
                     <CodeBlocks 
                     position={"flex-row-reverse"}
                     heading={

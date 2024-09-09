@@ -5,31 +5,33 @@ import { TypeAnimation } from 'react-type-animation';
 
 const CodeBlocks = ({position, heading, subheading, ctabtn1, ctabtn2, bgGradiant, codeblock, codecolor}) => {
   return (
-    <div className={`flex ${position} gap-[30px] max-h-[522px] justify-evenly`}>
+    <div className={`flex  ${position} gap-[30px]   lg:gap-[2px] max-h-[522px] justify-evenly`}>
 
         {/* Section 1 */}
         <div className='w-5/12 h-[284px] flex flex-col gap-[1px] justify-between '>
             {heading}
-            <div className='text-richblack-300 font-bold '>
+            <div className='text-richblack-300 font-bold'>
                 {subheading}
             </div>
 
-            <div className='flex flex-row justify-between max-w-[300px]'>
+            <div className='flex flex-row gap-[30px] lg:gap-[5px] justify-between max-w-[300px]'>
                 <CTAButton active={ctabtn1.active} linkto={ctabtn1.linkto}>
-                    <div className='flex flex-row justify-between text-center items-center gap-2'>
+                    <div className='flex flex-row justify-between w-[120px]  py-2 lg:py-0  items-center gap-2'>
                         {ctabtn1.Text}
                         <FaLongArrowAltRight />
                     </div>
                 </CTAButton>
 
                 <CTAButton active={ctabtn2.active} linkto={ctabtn2.linkto}>
-                    {ctabtn2.Text}
+                    <p className='w-[90px] text-center translate-y-1 lg:translate-y-0'>
+                        {ctabtn2.Text}
+                    </p>
                 </CTAButton>
             </div>
         </div>
 
         {/* Section 2 */}
-        <div className='w-5/12 relative flex p-[32px] gap-2 border-2 border-orange-200'
+        <div className='w-5/12  relative flex p-[32px] gap-2 border-2 border-orange-200'
             style={{
                 border: '1px solid',
                 borderImageSource: 'linear-gradient(121.74deg, rgba(255, 255, 255, 0.22) -7.75%, rgba(255, 255, 255, 0) 37.38%)',
