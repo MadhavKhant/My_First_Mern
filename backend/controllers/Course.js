@@ -248,7 +248,7 @@ exports.TopThreeCourses = async (req, res) => {
     }
     catch(e)
     {
-        console.log("error during fatching top 3 courses error is: ", e);
+    
         return res.status(400).json({
             success: false,
             message: e.message
@@ -300,7 +300,7 @@ exports.UpdateCourse = async (req, res) => {
     }
     catch(e)
     {
-        console.log(e);
+        
         return res.status(400).json({
             success: false,
             message: e.message
@@ -337,7 +337,97 @@ exports.DeleteCourse = async (req, res) => {
         })
     }
     catch(e){
-        console.log(e);
+       
+        return res.status(400).json({
+            success: false,
+            message: e.message
+        })
+    }
+}
+
+exports.DeleteCourseOfStudent = async (req, res) => {
+    try{
+
+        const {CourseId} = req.body;
+        const UserId = req.user.id;
+
+        if(!CourseId || !UserId)
+        {
+            return res.status(400).json({
+                success: false,
+                message: "Missing Data he"
+            })
+        }
+
+        //Remove userId from enrolled course
+        const UpdatedCourse = await Course.findByIdAndUpdate(
+            {_id: CourseId},
+            {
+                $pull: {
+                    StudentsEnrolled: UserId
+                }
+            },
+            {new:true}
+        )
+
+        //remove courseId from user in
+        const updatedUser = await User.findByIdAndUpdate(
+            {_id: UserId},
+            {
+                $pull: {
+                    Courses: CourseId
+                }
+            }
+        )
+
+        return res.status(200).json({
+            success: true,
+            data: UpdatedCourse,
+            message: "Course Deleted Successfully"
+        })
+    }
+    catch(e){
+        return res.status(400).json({
+            success:false,
+            message: e.message
+        })
+    }
+}
+
+exports.DeleteAllEnrolledCourseOfStudent = async (req, res) => {
+    try{
+        
+        //fetch user id
+        const UserId = req.user.id;
+        
+
+       const user = await User.findById(UserId);
+       const Courses = user.Courses;
+       user.Courses = [];
+       const data = user.Courses;
+       user.save();
+
+       Courses.forEach(async (course) => {
+        let id = course._id;
+        await Course.findByIdAndUpdate(
+            {_id: id},
+            {
+                $pull:{
+                    StudentsEnrolled: UserId
+                }
+            }
+        )
+       })
+        
+        return res.status(200).json({
+            success:true,
+            message: "All Enrolled Courses Deleted",
+            data
+        })
+
+
+    }
+    catch(e){
         return res.status(400).json({
             success: false,
             message: e.message
@@ -349,7 +439,7 @@ exports.getInstructorCourses = async (req, res) => {
     try{
 
         const InstructorId = req.user.id;
-        console.log("InstructorId: ", InstructorId);
+       
 
         if(!InstructorId){
             return res.status(400).json({

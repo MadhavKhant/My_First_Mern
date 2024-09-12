@@ -66,17 +66,17 @@ const Catalog = () => {
                 </span>
             </p>
             <p> {catalogPageData?.data?.selectedCategory?.Name} </p>
-            <p> {catalogPageData?.data?.selectedCategory?.Description}</p>
+            {/* <p> {catalogPageData?.data?.selectedCategory?.Description}</p> */}
         </div>
 
         <div>
-            <div className='ml-[20%]'>
+            {/* <div className='ml-[20%]'>
                 Courses to get you started
-            </div>
-            <div className=' flex gap-x-3 ml-[20%]'>
+            </div> */}
+            {/* <div className=' flex gap-x-3 ml-[20%]'>
                 <p>Most Popular</p>
                 <p>New</p>
-            </div>
+            </div> */}
             <div className='ml-[20%] flex gap-10 mt-6 mb-12'>
                 {/* <CourseSlider Courses={catalogPageData?.data?.selectedCategory?.Course} /> */}
                 {

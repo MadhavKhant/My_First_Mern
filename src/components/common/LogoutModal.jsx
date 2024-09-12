@@ -1,8 +1,18 @@
 import React from 'react'
+import { useEffect } from 'react';
+
+
+
 
 const LogoutModal = ({modalData}) => {
 
   const { text1, text2, btnT1, btnT2, btnH1, btnH2 } = modalData;
+
+
+  // Scroll to the top of the page when the modal appears
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, []);
 
   return (
     <div className='h-full w-full min-w-[1400px] min-h-[500px] border-2 border-richblack-25 mx-auto p-2 z-50 inset-0

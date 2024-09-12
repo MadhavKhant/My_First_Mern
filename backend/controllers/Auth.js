@@ -13,7 +13,7 @@ require("dotenv").config();
 exports.SendOTP = async (req, res) => {
     try
     {
-		console.log("enterd in send otp controllers")
+	
         //fetch email from request body
         const {Email} = req.body;
 
@@ -35,7 +35,7 @@ exports.SendOTP = async (req, res) => {
             specialChars: false
         });
 
-        console.log("OTP generated: ", otp);
+       
 
         // //check otp is unique or not
         // const result = await OTP.findOne({otp: otp});
@@ -54,7 +54,7 @@ exports.SendOTP = async (req, res) => {
 
         //create an entry for OTP
         const otpBody = await OTP.create(payload);
-        console.log("Otp body is:, ", otpBody);
+        
 
         res.status(200).json({
             success: true,
@@ -65,7 +65,7 @@ exports.SendOTP = async (req, res) => {
     }
     catch(error)
     {
-        console.log("error during sending otp",error);
+   
         res.status(400).json({
             success:false,
             message: error.message
@@ -92,7 +92,7 @@ exports.SendOTP = async (req, res) => {
 
 //         //check user already exist or not
 //         const existing = await User.findOne({Email});
-//         console.log("/n Existing User: ", existing);
+// 
 
 //         if(existing)
 //         {
@@ -120,12 +120,12 @@ exports.SendOTP = async (req, res) => {
 //             })
 //         }
 
-//         console.log("/n Password and confirmpassword matched");
+//       
 
 //         const Allotp = await OTP.find({Email});
-//         console.log("\n \n All otp: ", Allotp);
+//   
 //         const response = await OTP.find({ email: Email }).sort({ createdAt: -1 }).limit(1);
-//         console.log("\n \n  Response : ", response);
+//     
 
 //         //validate otp
 //         if(response.length == 0)
@@ -154,7 +154,7 @@ exports.SendOTP = async (req, res) => {
 //             About: null 
 //         }) 
 
-//         console.log("\n Profile created null");
+
 
 //         // Create the user
 // 		let approved = "";
@@ -172,8 +172,7 @@ exports.SendOTP = async (req, res) => {
 //             Approved: approved,
 //         });
 
-//         console.log("\n User created: ", user);
-
+//   
 //         return res.status(200).json({
 //             success: true,
 //             message: 'User registed successfully',
@@ -182,7 +181,7 @@ exports.SendOTP = async (req, res) => {
 
 //     }
 //     catch(error){
-//         console.log("error during Signup", error);
+//    
 //         return res.status(400).json({
 //             success: false,
 //             message: 'User can not registered please try again'
@@ -238,11 +237,11 @@ exports.Signup = async (req, res) => {
 		}
 
         // const allotp = await OTP.findOne({Email});
-        // console.log("\n Allotps :", allotp);
+    
 
 		// Find the most recent OTP for the email
 		const response = await OTP.find({ Email }).sort({ createdAt: -1 }).limit(1);
-		console.log("\n Response is :",response);
+
 		if (response.length === 0) {
 			// OTP not found for the email
 			return res.status(400).json({
@@ -328,7 +327,7 @@ exports.Login = async (req, res) => {
         //check password is right or wrong if right then create token
         if(await bcrypt.compare(Password, user.Password))
         {
-            console.log("/n password matched");
+   
             const payload = {
                 Email: user.Email,
                 id: user._id,
@@ -340,7 +339,7 @@ exports.Login = async (req, res) => {
             });
             user.token = token;
 
-            //console.log("password of user is: ", userexist.Password);
+            
             user.Password = undefined;
             const option = {
                 expires: new Date(Date.now() + 3*24*60*60*1000) //3 days
@@ -366,7 +365,7 @@ exports.Login = async (req, res) => {
     }
     catch(error)
     {
-        console.log(error);
+       
         return res.status(400).json({
             success: false,
             message: 'error during login'
@@ -420,7 +419,6 @@ exports.ChangePassword = async (req, res) => {
 			{ new: true }
 		);
 
-        console.log("sending mail as your password is updateed");
 		// Send notification email
 		try {
 			const emailResponse = await MailSender(
@@ -430,7 +428,7 @@ exports.ChangePassword = async (req, res) => {
 					`Password updated successfully for ${updatedUserDetails.FirstName} ${updatedUserDetails.LastName}`
 				)
 			);
-			console.log("Email sent successfully:", emailResponse.response);
+
 		} catch (error) {
 			// If there's an error sending the email, log the error and return a 500 (Internal Server Error) error
 			console.error("Error occurred while sending email:", error);

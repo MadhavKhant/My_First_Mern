@@ -20,7 +20,7 @@ exports.CreateCategory = async (req, res) => {
             Description: Description
         });
 
-        console.log(CategoryDetails);
+       
 
         return res.status(200).json({
             success: true,
@@ -103,7 +103,7 @@ exports.CategoryPageDetails = async (req, res) => {
 
     }
     catch(error ) {
-        console.log(error);
+       
         return res.status(500).json({
             success:false,
             message:error.message,

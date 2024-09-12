@@ -19,6 +19,8 @@ const {
   GET_FULL_COURSE_DETAILS_AUTHENTICATED,
   CREATE_RATING_API,
   LECTURE_COMPLETION_API,
+  DELETE_COURSE_OF_ENROLLED_STUDENT,
+  DELETE_ALL_OF_ENROLLED_STUDENT
 } = courseEndpoints
 
 export const getAllCourses = async () => {
@@ -312,6 +314,60 @@ export const deleteCourse = async (data, token) => {
   }
   toast.dismiss(toastId)
 }
+
+export const DeleteCourseOfEnrolledUser = async (CourseId, token) => {
+  const toastId = toast.loading("Loading...")
+  try{
+    const res = await apiConnector("DELETE", DELETE_COURSE_OF_ENROLLED_STUDENT, 
+      {
+        CourseId: CourseId
+      }, 
+      {
+      Authorization: `Bearer ${token}`,
+      }
+  )
+
+    console.log("DELETE THE COURSE OF ENROLLED STUDENT RESPONSE..........", res);
+    if(!res?.data?.success){
+      throw new Error("Could Not Delete Course");
+    }
+
+    toast.success("Course Deleted")
+    toast.dismiss(toastId)
+  }
+  catch(error){
+    console.log("DELETE COURSE Of STUDENT API ERROR............", error)
+    toast.error(error.message)
+  }
+  toast.dismiss(toastId)
+}
+
+
+export const DeleteAllEnrolledCoursesOfStudent = async (token) => {
+  const toastId = toast.loading("Loading...");
+  try{
+    const res = await apiConnector("DELETE", DELETE_ALL_OF_ENROLLED_STUDENT,{}, 
+      {
+      Authorization: `Bearer ${token}`,
+      }
+    )
+    
+    console.log("DELETE ALL COURSE OF ENROLLED STUDENT RESPONSE..........", res);
+    if(!res?.data?.data?.success){
+      throw new Error("Could Not Delete Course");
+    }
+
+    toast.success("All Course Deleted")
+    toast.dismiss(toastId)
+  }
+  catch(error){
+    console.log("DELETE ALL COURSE Of STUDENT API ERROR............", error)
+    toast.error(error.message)
+    toast.dismiss(toastId)
+  }
+  toast.dismiss(toastId)
+}
+
 
 // get full details of a course
 export const getFullDetailsOfCourse = async (courseId, token) => {

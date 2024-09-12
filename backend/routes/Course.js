@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 
-const { CreateCourse, GetAllCourses, GetCourseDetails, TopThreeCourses, UpdateCourse, DeleteCourse, getInstructorCourses } = require("../controllers/Course");
+const { CreateCourse, GetAllCourses, GetCourseDetails, TopThreeCourses, UpdateCourse, DeleteAllEnrolledCourseOfStudent, DeleteCourse, DeleteCourseOfStudent, getInstructorCourses } = require("../controllers/Course");
 const { CreateCategory, GetAllCategories, CategoryPageDetails } = require("../controllers/Category");
 const { CreateSection, UpdateSection, DeleteSection } = require("../controllers/Section");
 const { CreateSubSection, updateSubSection, DeleteSubSection } = require("../controllers/SubSection");
@@ -18,6 +18,8 @@ const {updateCourseProgress} = require("../controllers/CourseProgress");
 router.post("/createCourse", auth, isInstructor, CreateCourse);
 router.post("/UpdateCourse", auth, isInstructor, UpdateCourse);
 router.delete("/deleteCourse", auth, isInstructor, DeleteCourse);
+router.delete("/deleteCourseOfStudent", auth, isStudent, DeleteCourseOfStudent);
+router.delete("/deleteAllEnrolledCourseOfStudent", auth, isStudent, DeleteAllEnrolledCourseOfStudent);
 router.post("/getFullCourseDetails", auth, GetCourseDetails);
 router.post("/getCourseDetails", auth, GetCourseDetails)
 router.get("/getAllCourses", GetAllCourses);

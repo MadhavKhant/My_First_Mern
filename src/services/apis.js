@@ -4,7 +4,7 @@ const BASE_URL = process.env.REACT_APP_BASE_URL;
 //const BASE_URL =  "http://localhost:4000/api/v1";
 //const BASE_URL = "https://my-first-mern-e2wk.onrender.com/api/v1"
 
-console.log("BAsee... url: ", BASE_URL);
+
 
 // AUTH ENDPOINTS
 export const endpoints = {
@@ -45,10 +45,11 @@ export const courseEndpoints = {
   DELETE_SECTION_API: BASE_URL + "/course/deleteSection",
   DELETE_SUBSECTION_API: BASE_URL + "/course/deleteSubSection",
   DELETE_COURSE_API: BASE_URL + "/course/deleteCourse",
-  GET_FULL_COURSE_DETAILS_AUTHENTICATED:
-    BASE_URL + "/course/getFullCourseDetails",
+  GET_FULL_COURSE_DETAILS_AUTHENTICATED: BASE_URL + "/course/getFullCourseDetails",
   LECTURE_COMPLETION_API: BASE_URL + "/course/updateCourseProgress",
   CREATE_RATING_API: BASE_URL + "/course/createRating",
+  DELETE_COURSE_OF_ENROLLED_STUDENT: BASE_URL + "/course/deleteCourseOfStudent",
+  DELETE_ALL_OF_ENROLLED_STUDENT: BASE_URL + "/course/deleteAllEnrolledCourseOfStudent"
 }
 
 // RATINGS AND REVIEWS
