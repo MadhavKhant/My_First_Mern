@@ -14,9 +14,6 @@ const MyCourses = () => {
 
     //show instuctor courses on first render
     useEffect(() => {
-
-       
-
         //fetch all courses
         const fetchCourses = async () => {
             setLoading(true);

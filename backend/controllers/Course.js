@@ -160,9 +160,6 @@ exports.GetCourseDetails = async (req, res) => {
     try{
 
         const {courseId} = req.body;
-        console.log("req: ", req.user);
-
-        const userId = req.user.id;
 
         if(!courseId)
         {
@@ -202,8 +199,7 @@ exports.GetCourseDetails = async (req, res) => {
         }
 
         const courseProgress = await CourseProgress.findOne({
-            courseId:courseId,
-            userId:userId,
+            courseId:courseId
         })
 
         return res.status(200).json({

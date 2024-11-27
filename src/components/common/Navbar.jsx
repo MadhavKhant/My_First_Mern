@@ -12,17 +12,6 @@ import { useEffect } from 'react';
 import { categories } from '../../services/apis';
 import {BsChevronDown} from 'react-icons/bs'
 
-// const subLinks = [
-//     {
-//         title: "python",
-//         link:"/catalog/python"
-//     },
-//     {
-//         title: "web dev",
-//         link:"/catalog/web-development"
-//     },
-// ];
-
 
 const Navbar = () => {
 
@@ -30,8 +19,8 @@ const Navbar = () => {
     const {token} = useSelector((state) => state.auth);
     const {user} = useSelector((state) => state.profile);
     const {totalItems} = useSelector((state) => state.cart);
-    const [loading, setLoading] = useState(false)
-
+    const [loading, setLoading] = useState(false);
+    
     const location = useLocation();
     const data = NavbarLinks;
     const matchRoute = (route) => {
@@ -39,18 +28,20 @@ const Navbar = () => {
     }
 
     useEffect(() => {
-        (async () => {
-          setLoading(true)
-          try {
-            const res = await apiConnector("GET", categories.CATEGORIES_API)
-            setSubLinks(res.data.data)
-          } catch (error) {
-            console.log("Could not fetch Categories.", error)
-          }
-          setLoading(false)
-        })()
+        const FetchingAndSettingCategories = async () => {
+            setLoading(true)
+    
+            try {
+                const res = await apiConnector("GET", categories.CATEGORIES_API)
+                setSubLinks(res.data.data)
+            } catch (error) {
+                console.log("Could not fetch Categories.", error)
+            }
+    
+            setLoading(false)
+        }
+        FetchingAndSettingCategories();
       }, [])
-
 
 
   return (
@@ -179,7 +170,6 @@ const Navbar = () => {
                     }
                 </div>
 
-                
         </div>
     </div>
   )

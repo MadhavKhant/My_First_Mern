@@ -27,8 +27,6 @@ const CourseDetails = () => {
     const [isActive, setIsActive] = useState(Array(0));
     
 
-
-
     useEffect(() => {
         const CourseDetail = async () => {
             try{
@@ -86,7 +84,7 @@ const CourseDetails = () => {
         }
 
         setConfirmationModal({
-            text1:"you are not Logged in",
+            text1:"you are not Logged in ",
             text2:"Please login to purchase the course",
             btnT1:"Login",
             btnT2:"Cancel",

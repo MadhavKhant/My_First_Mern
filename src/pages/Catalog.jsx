@@ -10,24 +10,29 @@ import CourseCard from '../components/core/Catalog/CourseCard';
 
 const Catalog = () => {
 
-    const {CatalogName} = useParams();
+    const {CatalogName} = useParams("");
     const [catalogPageData, setCatalogPageData] = useState(null);
     const [CategoryId, setCategoryId] = useState("");
 
-
     //Set category id in CAtegoryId of selected category from navbar 
     useEffect(()=> {
-        const getCategories = async() => {
-            const res = await apiConnector("GET", categories.CATEGORIES_API);
-            const category_id = res?.data?.data?.filter((ct) => ct.Name.split(" ").join("-") === CatalogName)[0]._id;
-            setCategoryId(category_id);
+        if(CatalogName)
+        {
+            const getCategories = async() => {
+                const res = await apiConnector("GET", categories.CATEGORIES_API);
+                const category_id = res?.data?.data?.filter((ct) => ct.Name.split(" ").join("-") === CatalogName)[0]._id;
+                setCategoryId(category_id);
+            }
+            getCategories();
         }
-        getCategories();
-    },[CatalogName]);
+    }, [CatalogName]);
 
     //fetch single Category Page details
     useEffect(() => {
-        const getCategoyPageDetails = async () => {
+        
+        if(CategoryId)
+        {
+            const getCategoyPageDetails = async () => {
             try{
                 const res = await getCatalogPageData(CategoryId);
                 //console.log("response in single Page CAtegory DEtails: ", res);
@@ -46,6 +51,7 @@ const Catalog = () => {
         }
 
         getCategoyPageDetails();
+        }
 
 
     },[CategoryId])
@@ -83,6 +89,7 @@ const Catalog = () => {
                     catalogPageData?.data?.selectedCategory.Course.map((ele, index) => (
                         <div key={index}>
                             <CourseCard  Course={ele}/>
+                            
                         </div>
                     ))
                 }

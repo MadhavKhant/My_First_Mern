@@ -36,7 +36,7 @@ const CourseDetailsCard = ({course, setConfirmationModal, handleBuyCourse}) => {
         }
         setConfirmationModal({
             text1:"you are not logged in",
-            text2:"Please login to add to cart",
+            text2:"Please login for add to cart",
             btnT1:"login",
             btnT2:"cancel",
             btnH1:()=>navigate("/login"),

@@ -29,15 +29,15 @@ import VideoDetails from "./components/core/viewCourse/VideoDetails";
 
 
 
-
 function App() {
   
   const {user} = useSelector((state) => state.profile);
-  
 
   return (
     <div className="w-screen min-h-screen bg-richblack-900 flex flex-col font-inter">
+    
     <Navbar />
+
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/signup" element={<OpenRoute><Signup /></OpenRoute>} />
@@ -69,8 +69,8 @@ function App() {
           {
             user?.AccountType === ACCOUNT_TYPE.STUDENT && (
               <>
-              <Route path="dashboard/cart" element={<Cart />} />
-              <Route path="dashboard/enrolled-courses" element={<EnrolledCourses />} />
+                <Route path="dashboard/cart" element={<Cart />} />
+                <Route path="dashboard/enrolled-courses" element={<EnrolledCourses />} />
               </>
             )
           }

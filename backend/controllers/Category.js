@@ -40,7 +40,7 @@ exports.CreateCategory = async (req, res) => {
 exports.GetAllCategories = async (req, res) => {
     try{
 
-        const data = await Category.find({}, {Name: true, Description: true});
+        const data = await Category.find({});
 
         return res.status(200).json({
             success: true,

@@ -20,8 +20,8 @@ router.post("/UpdateCourse", auth, isInstructor, UpdateCourse);
 router.delete("/deleteCourse", auth, isInstructor, DeleteCourse);
 router.delete("/deleteCourseOfStudent", auth, isStudent, DeleteCourseOfStudent);
 router.delete("/deleteAllEnrolledCourseOfStudent", auth, isStudent, DeleteAllEnrolledCourseOfStudent);
-router.post("/getFullCourseDetails", auth, GetCourseDetails);
-router.post("/getCourseDetails", auth, GetCourseDetails)
+router.post("/getFullCourseDetails", GetCourseDetails);
+router.post("/getCourseDetails", GetCourseDetails)
 router.get("/getAllCourses", GetAllCourses);
 router.get("/getInstructorCourses", auth, isInstructor, getInstructorCourses)
 router.get("/TopThreeCourses", TopThreeCourses);

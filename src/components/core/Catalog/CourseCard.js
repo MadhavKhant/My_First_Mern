@@ -1,14 +1,7 @@
 import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
-
-
-
 const CourseCard = ({Course}) => {
-
-    // useEffect(()=>{
-    //     console.log("Single Course: ", Course);
-    // },[])
 
   return (
     <Link to={`/courses/${Course._id}`}>
