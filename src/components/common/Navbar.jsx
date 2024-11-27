@@ -33,7 +33,11 @@ const Navbar = () => {
     
             try {
                 const res = await apiConnector("GET", categories.CATEGORIES_API)
-                setSubLinks(res.data.data)
+                if (res?.data?.data) {
+                    setSubLinks(res.data.data); // Save fetched categories in state
+                } else {
+                    console.error("No data returned for categories.");
+                }
             } catch (error) {
                 console.log("Could not fetch Categories.", error)
             }
@@ -42,6 +46,21 @@ const Navbar = () => {
         }
         FetchingAndSettingCategories();
       }, [])
+
+      const handleHover = async () => {
+        if (!subLinks.length) { // Check if data is missing
+            setLoading(true);
+            try {
+                const result = await apiConnector("GET", categories.CATEGORIES_API);
+                if (result?.data?.data) {
+                    setSubLinks(result.data.data);
+                }
+            } catch (error) {
+                console.error("Error fetching categories on hover:", error);
+            }
+            setLoading(false);
+        }
+    };
 
 
   return (
@@ -64,11 +83,13 @@ const Navbar = () => {
                                     (
                                         <>
                                             <div
-                                            className={`group relative flex cursor-pointer items-center gap-1 ${
-                                                matchRoute("/Catalog/:CatalogName")
-                                                ? "text-yellow-25"
-                                                : "text-richblack-25"
-                                            }`}
+                                                className={`group relative flex cursor-pointer items-center gap-1 ${
+                                                    matchRoute("/Catalog/:CatalogName")
+                                                    ? "text-yellow-25"
+                                                    : "text-richblack-25"
+                                                }`}
+
+                                                onMouseEnter={handleHover}
                                             >
                                                 <p>{ele.title}</p>
                                                 <BsChevronDown />
