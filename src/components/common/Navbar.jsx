@@ -62,7 +62,6 @@ const Navbar = () => {
         }
     };
 
-
   return (
     <div className='w-full flex justify-center items-start bg-richblack-800 border-b-2 border-richblack-700'>
         <div className='w-[70%] flex items-center justify-between mt-1 mb-1 p-1'>
