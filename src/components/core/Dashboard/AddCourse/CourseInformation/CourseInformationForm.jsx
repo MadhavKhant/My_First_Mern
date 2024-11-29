@@ -244,7 +244,7 @@ const CourseInformationForm = () => {
         {/* Thumbnail Image Section */}
         <Upload
             name="courseImage"
-            label="Course Thumbnailx"
+            label="Course Thumbnail"
             register={register}
             setValue={setValue}
             errors={errors}

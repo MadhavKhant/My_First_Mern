@@ -22,7 +22,9 @@ export default function Upload({
     console.log("viewData: ", viewData);
   },[])
 
-  const { course } = useSelector((state) => state.course)
+  const { course } = useSelector((state) => state.course);
+  console.log("Redux course state:", course); // Log Redux state
+
   const [selectedFile, setSelectedFile] = useState(null)
   const [previewSource, setPreviewSource] = useState(
     viewData ? viewData : editData ? editData : ""
@@ -32,8 +34,9 @@ export default function Upload({
   const onDrop = (acceptedFiles) => {
     const file = acceptedFiles[0]
     if (file) {
-      previewFile(file)
-      setSelectedFile(file)
+      previewFile(file);
+      setSelectedFile(file);
+      console.log("File dropped:", file); // Log dropped file info
     }
   }
 
@@ -45,23 +48,25 @@ export default function Upload({
   })
 
   const previewFile = (file) => {
-    // console.log(file)
-    const reader = new FileReader()
-    reader.readAsDataURL(file)
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
     reader.onloadend = () => {
-      setPreviewSource(reader.result)
-    }
-  }
+      setPreviewSource(reader.result);
+      console.log("File preview source updated:", reader.result); // Log preview source
+    };
+    reader.onerror = () => console.error("Error reading file:", reader.error); // Log file read errors
+  };
 
   useEffect(() => {
-    register(name, { required: true })
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [register])
+    register(name, { required: true });
+    console.log("Registered input field:", name); // Log field registration
+  }, [register, name]);
 
+  // Sync selected file with form state
   useEffect(() => {
-    setValue(name, selectedFile)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedFile, setValue])
+    setValue(name, selectedFile);
+    console.log("Form value set:", { name, selectedFile }); // Log form field value
+  }, [selectedFile, name, setValue]);
 
   return (
     <div className="flex flex-col space-y-2">
