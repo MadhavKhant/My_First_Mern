@@ -70,7 +70,7 @@ export default function Upload({
   }, [selectedFile, name, setValue]);
 
   return (
-    <div className="flex flex-col space-y-2" {...getRootProps()}>
+    <div className="flex flex-col space-y-2" >
       <label className="text-sm text-richblack-5" htmlFor={name}>
         {label} {!viewData && <sup className="text-pink-200">*</sup>}
       </label>
@@ -110,7 +110,7 @@ export default function Upload({
         ) : (
           <div
             className="flex w-full flex-col items-center p-6"
-            
+            onClick={() => inputRef.current && inputRef.current.click()} // Trigger input dialog manually
           >
             <input {...getInputProps()} ref={inputRef} />
             <div className="grid aspect-square w-14 place-items-center rounded-full bg-pure-greys-800">
