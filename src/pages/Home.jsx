@@ -12,8 +12,6 @@ import ExploreMore from "../components/core/HomePage/ExploreMore";
 import Footer from "../components/common/Footer";
 
 
-
-
 const Home = () => {
 
     return (

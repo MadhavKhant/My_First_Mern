@@ -12,6 +12,7 @@ exports.ResetPasswordToken = async (req, res) => {
         //get email from req
         const {Email} = req.body;
 
+        console.log("req.body: ", req.body);
         console.log("Email fached: ", Email)
         
         //check user from this mail, email validation
@@ -44,7 +45,7 @@ exports.ResetPasswordToken = async (req, res) => {
         console.log("UpdatedDetail: ", UpdatedDetail);
 
         //create url to send via email to user
-        const url = `http://localhost:3000/update-password/${token}`;
+        const url = `http://localhost:4000/update-password/${token}`;
 
         console.log("link generated: ", url);
         
@@ -127,7 +128,7 @@ exports.ResetPassword = async (req, res) => {
 
         //return response
         return res.status(200).json({
-            success:false,
+            success:true,
             message:'password reset successfull'
         })
     }
