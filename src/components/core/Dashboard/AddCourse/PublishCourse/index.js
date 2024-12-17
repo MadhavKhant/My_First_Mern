@@ -25,10 +25,6 @@ export default function PublishCourse(){
         navigate("/dashboard/my-courses");
     }
 
-    useEffect(() => {
-        console.log("course value index: ", course);
-    },[])
-
     const handleCoursePublish = async () => {
 
         //check if form updated or not
@@ -49,7 +45,6 @@ export default function PublishCourse(){
         setLoading(true);
 
         const result = await editCourseDetails(formData, token);
-        console.log("result frontend EditCourseDetials: ", result);
         if(result){
             goToCourses()
         }

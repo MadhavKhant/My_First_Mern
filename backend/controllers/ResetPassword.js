@@ -7,18 +7,11 @@ const bcrypt = require("bcryptjs");
 //Reset password token
 exports.ResetPasswordToken = async (req, res) => {
     try{
-
-        console.log("Entered in resetpassword token")
         //get email from req
         const {Email} = req.body;
 
-        console.log("req.body: ", req.body);
-        console.log("Email fached: ", Email)
-        
         //check user from this mail, email validation
         const user = await User.findOne({Email: Email});
-
-        console.log("User fatched: ", user);
 
         if(!user)
         {
@@ -30,8 +23,6 @@ exports.ResetPasswordToken = async (req, res) => {
         
         //generate token
         const token = crypto.randomBytes(20).toString("hex");
-        
-        console.log("Resetpassword generated: ", token);
 
         //update user by adding token and expiration time
         const UpdatedDetail = await User.findOneAndUpdate({Email: Email}, 
@@ -41,13 +32,9 @@ exports.ResetPasswordToken = async (req, res) => {
                                                             },
                                                             {new: true});
         
-        
-        console.log("UpdatedDetail: ", UpdatedDetail);
 
         //create url to send via email to user
         const url = `http://localhost:4000/update-password/${token}`;
-
-        console.log("link generated: ", url);
         
         //send mail containing url
         await MailSender(Email, "Password Reset Link", `Password Reset link: ${url}`);

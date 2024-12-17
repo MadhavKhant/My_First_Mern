@@ -15,16 +15,11 @@ exports.capturePayment = async(req, res) => {
     const {courses} = req.body;
     const userId = req.user.id;
 
-    console.log("enter in capture part");
-    console.log("courses: ", courses);
-    console.log("userId: ", userId);
-
     if(courses.length === 0) {
         return res.json({success:false, message:"Please provide Course Id"});
     }
 
     let totalAmount = 0;
-    console.log("11")
 
     for(const course_id of courses) {
         let course;
@@ -48,7 +43,6 @@ exports.capturePayment = async(req, res) => {
         }
     }
 
-    console.log("12")
     const currency = "INR";
     const options = {
         amount: totalAmount * 100,
@@ -56,12 +50,8 @@ exports.capturePayment = async(req, res) => {
         receipt: Math.random(Date.now()).toString(),
     }
 
-    console.log("13");
-    console.log("options: ", options);
-
     try{
         const paymentResponse = await instance.orders.create(options);
-        console.log("14")
 
         res.json({
             success:true,
@@ -144,7 +134,6 @@ const enrollStudents = async(courses, userId, res) => {
             `Successfully Enrolled into ${enrolledCourse.CourseName}`,
             courseEnrollmentEmail(enrolledCourse.CourseName, `${enrolledStudent.FirstName}`)
         )    
-        //console.log("Email Sent Successfully", emailResponse.response);
         }
         catch(error) {
             console.log(error);

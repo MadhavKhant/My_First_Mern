@@ -22,10 +22,7 @@ const ViewCourse = () => {
     const x1 = async() => {
 
       setLoading(true)
-
       const CourseDetails = await getFullDetailsOfCourse(courseId, token);
-      console.log("CourseDetails:::", CourseDetails);
-
       dispatch(setEntireCourseData(CourseDetails));
       dispatch(setCourseSectionData(CourseDetails.CourseContent));
 
@@ -35,8 +32,6 @@ const ViewCourse = () => {
       })
 
       dispatch(setTotalNoofLecture(TotalLectures));
-
-      console.log("allgood:")
 
       setLoading(false)
     }

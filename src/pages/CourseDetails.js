@@ -30,11 +30,7 @@ const CourseDetails = () => {
     useEffect(() => {
         const CourseDetail = async () => {
             try{
-
-                console.log("hello:");
                 const result = await fetchCourseDetails(courseId, token);
-
-                console.log("result is: ", result);
                 setCourseData(result);
                 
             }
@@ -50,7 +46,6 @@ const CourseDetails = () => {
     },[courseId])
     
     useEffect(() => {
-        console.log("Printing CourseDEtails by id: ", courseData);
         let lectures = 0;
         courseData?.data?.CourseContent?.forEach((sec) => {
             lectures += sec.SubSection.length || 0
@@ -78,7 +73,6 @@ const CourseDetails = () => {
 
     const handleBuyCourse = () => {
         if(token) {
-            console.log("user is: ", user);
             buyCourse(token, [courseId], user, navigate, dispatch);
             return;
         }

@@ -6,8 +6,6 @@ const Course = require("../models/Course");
 exports.UpdateProfile = async (req, res) => {
     try{
 
-        console.log("\n\nEntered in Updated Profile");
-
         //get data ans UserId
         const {Dob="", Gender="", About="", ContactNumber=""} = req.body;
         const userid = req.user.id;
@@ -21,22 +19,16 @@ exports.UpdateProfile = async (req, res) => {
             });
         }
 
-        console.log("data validation success");
-
         //find profile
         const userDetail = await User.findById(userid);
         const profileId = userDetail.AdditionalDetail;
         const ProfileData = await Profile.findById(profileId);
-
-        console.log("userdetail profileid profiledata fetched");
 
         //update profile
         ProfileData.Dob = Dob;
         ProfileData.Gender = Gender;
         ProfileData.About = About;
         ProfileData.ContactNumber = ContactNumber;
-
-        console.log("Object created");
 
         await ProfileData.save(); 
 
@@ -62,13 +54,8 @@ exports.UpdateProfile = async (req, res) => {
 exports.DeleteAccount = async (req, res) => {
     try{
 
-        console.log("\n\n\n entered in delete account \n\n\n");
         ///get id
         const id = req.user.id;
-
-        console.log("user in deleteaccount: ", req.user);
-        console.log("userin in deleteaccount: ", req.user.id);
-
 
         //validation
         const userDetail = await User.findById(id);
@@ -140,9 +127,6 @@ exports.GetUserDetails = async (req, res) => {
 exports.UpdateDisplayPicture = async (req, res) => {
     try {
 
-      console.log("\n\nEntered in UpdateDisplayPicture\n");
-
-
       const displayPicture = req.files.displayPicture;
       const userId = req.user.id
       const image = await UploadImageToCloudinary(
@@ -152,16 +136,11 @@ exports.UpdateDisplayPicture = async (req, res) => {
         1000
       )
 
-      console.log("displaypicture: ", displayPicture);
-
-      console.log("\nImage is: ", image);
       const updatedProfile = await User.findByIdAndUpdate(
         { _id: userId },
         { image: image.secure_url },
         { new: true }
       );
-
-      console.log("\n Updated Profile: ", updatedProfile);
 
       res.send({
         success: true,

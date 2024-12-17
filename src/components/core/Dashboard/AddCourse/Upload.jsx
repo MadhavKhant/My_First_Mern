@@ -17,14 +17,7 @@ export default function Upload({
   viewData = null,
 }) {
 
-
-  useEffect(() => {
-    console.log("viewData: ", viewData);
-    console.log("EditData: ", editData);
-  },[])
-
   const { course } = useSelector((state) => state.course);
-  console.log("Redux course state:", course); // Log Redux state
 
   const [selectedFile, setSelectedFile] = useState(null)
   const [previewSource, setPreviewSource] = useState(
@@ -37,7 +30,6 @@ export default function Upload({
     if (file) {
       previewFile(file);
       setSelectedFile(file);
-      console.log("File dropped:", file); // Log dropped file info
     }
   }
 
@@ -53,20 +45,17 @@ export default function Upload({
     reader.readAsDataURL(file);
     reader.onloadend = () => {
       setPreviewSource(reader.result);
-      console.log("File preview source updated:", reader.result); // Log preview source
     };
     reader.onerror = () => console.error("Error reading file:", reader.error); // Log file read errors
   };
 
   useEffect(() => {
     register(name, { required: true });
-    console.log("Registered input field:", name); // Log field registration
   }, [register, name]);
 
   // Sync selected file with form state
   useEffect(() => {
     setValue(name, selectedFile);
-    console.log("Form value set:", { name, selectedFile }); // Log form field value
   }, [selectedFile, name, setValue]);
 
   return (

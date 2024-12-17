@@ -48,7 +48,6 @@ exports.CreateRatingAndReview = async (req, res) => {
 
         
         //return response
-        console.log("data: ", data);
         return res.status(200).json({
             success: true,
             message: "Successfully Rating and Review",

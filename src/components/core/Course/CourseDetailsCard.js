@@ -30,7 +30,6 @@ const CourseDetailsCard = ({course, setConfirmationModal, handleBuyCourse}) => {
             return;
         }
         if(token) {
-            console.log("dispatching add to cart")
             dispatch(addToCart(course));
             return;
         }

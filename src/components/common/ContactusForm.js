@@ -17,13 +17,12 @@ const ContactusForm = () => {
     } = useForm();
 
     const SubmitContactForm = async (data) => {
-        console.log("data from contactusform: ", data);
+
         try{
             setLoading(true)
-            console.log("enterd in contact us form before api hit");
+
             //const response = await apiConnector("POST", contactusEndpoint.CONTACT_US_API, data);
             const response = {status: "OK"};
-            console.log("Response of contactus form api: ", response);
             setLoading(false)
         }
         catch(e)

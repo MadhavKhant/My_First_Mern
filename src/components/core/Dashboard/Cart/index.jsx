@@ -6,11 +6,6 @@ import { useEffect } from "react"
 export default function Cart() {
   const { total, totalItems } = useSelector((state) => state.cart)
 
-  useEffect(() => {
-    console.log("Total is : ", total);
-    console.log("totlaItems: ", totalItems);
-  })
-
   return (
     <div className="py-3 px-9 ml-[100px]">
       <h1 className="mb-14 text-3xl font-medium text-richblack-5">Cart</h1>

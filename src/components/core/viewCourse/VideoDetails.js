@@ -123,8 +123,7 @@ const VideoDetails = () => {
           
           return;
         }
-        
-        console.log("filter: ", FilteredvideoData[0]);
+
         setVideoData(FilteredvideoData[0]);
         SetPreviewSource(courseEntireData.Thumbnail)
         setVideoEnded(false);

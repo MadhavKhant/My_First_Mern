@@ -35,11 +35,6 @@ const Catalog = () => {
             const getCategoyPageDetails = async () => {
             try{
                 const res = await getCatalogPageData(CategoryId);
-                //console.log("response in single Page CAtegory DEtails: ", res);
-                catalogPageData?.data?.selectedCategory?.Course.map((ele, index) => {
-                    console.log("ele is", ele.CourseName);
-                })
-
                 if(CategoryId){
                     setCatalogPageData(res);
                 }

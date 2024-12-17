@@ -10,10 +10,6 @@ export default function RenderCartCourses() {
   const { cart } = useSelector((state) => state.cart)
   const dispatch = useDispatch()
 
-  useEffect(() => {
-    console.log("cart value: ", cart);
-  })
-
   return (
     <div className="flex flex-1 flex-col">
       {

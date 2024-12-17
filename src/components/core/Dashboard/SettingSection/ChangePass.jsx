@@ -13,11 +13,9 @@ const ChangePass = () => {
   const {register, reset, handleSubmit, formState:{errors, isSubmitSuccessful}} = useForm();
 
   const SubmitChangePassForm = async (data) => {
-    console.log("data from Changepassform: ", data);
     try{
       const {OldPassword, NewPassword, ConfirmNewPassword} = data;
       const response = dispatch(ChangePassword(OldPassword, NewPassword, ConfirmNewPassword, navigate));
-      console.log("response from changepass in submitchangepassform: ", response);
     }
     catch(e){
       console.log("error in changepass form");

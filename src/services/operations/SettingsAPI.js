@@ -21,14 +21,10 @@ const {
 
 export function DeleteAccount(navigate){
     return async(dispatch) => {
-      console.log("entered in DeleteAccount in prrofileAPI");
-      console.log("api checking: ", DELETE_PROFILE_API);
       dispatch(setLoading(true))
       try{
-        console.log("entered in try block in delete account profileAPI")
+
         const response = await apiConnector("DELETE", DELETE_PROFILE_API);
-        console.log("response of deleting account: ", response);
-        console.log("response.data.success", response.data.success);
         if(!response.data.success){
             throw new Error(response.data.message)
         }
@@ -49,8 +45,7 @@ export function DeleteAccount(navigate){
 
 export function ChangePassword(OldPassword, NewPassword, ConfirmNewPassword, navigate){
   return async(dispatch) => {
-    console.log("enter in cha function");
-    console.log("data in function: ", OldPassword,   NewPassword, ConfirmNewPassword)
+
     dispatch(setLoading(true))
     try{
 
@@ -60,8 +55,6 @@ export function ChangePassword(OldPassword, NewPassword, ConfirmNewPassword, nav
         NewPassword,
         ConfirmNewPassword
     });
-
-      console.log("response from changepassword: ", response);
 
       if(!response.data.success){
         throw new Error(response.data.message)

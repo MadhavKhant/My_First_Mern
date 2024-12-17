@@ -22,13 +22,6 @@ export default function VideoDetailsSidebar(){
 
   useEffect(() => {
     const x2 = () => {
-
-      console.log("CourseEntireData: ", courseEntireData)
-      console.log("CourseSectionData: ", courseSectionData);
-      console.log("completedLecture: ", completedLecture)
-      console.log("activeStatus: ", activeStatus);
-      console.log("videoBarStatus: ", videoBarStatus);
-
       if(!courseSectionData.length) return
 
       // const currentSectionIndex = courseSectionData.findIndex(

@@ -94,8 +94,6 @@ exports.CreateCourse = async (req, res) => {
             {new: true}
         )
 
-        console.log("Created course from backend:", NewCourse);
-
         //add new course to model of instructor 
         await User.findByIdAndUpdate(
             {_id: userid_Instructor}, 
@@ -223,8 +221,6 @@ exports.TopThreeCourses = async (req, res) => {
     try{
 
         const TopThreeCourses = await Course.find({}).sort({StudentsEnrolled: -1}).limit(3);
-
-        console.log("Top three courses: ", TopThreeCourses);
 
         if(TopThreeCourses.length > 0)
         {

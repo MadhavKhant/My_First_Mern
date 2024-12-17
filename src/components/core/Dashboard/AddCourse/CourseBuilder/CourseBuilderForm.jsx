@@ -74,13 +74,11 @@ const CourseBuilderForm = () => {
 
     //if no changes
     if(course.data.CourseContent.length === 0){
-      console.log("enter in if")
       toast.error("Please add atleas one section")
       return
     }
 
     const AllSection = course.data.CourseContent;
-    console.log("AllSection: ", AllSection.length);
 
     for(let i=0; i<AllSection.length; i++){
       if(AllSection[i].SubSection.length === 0){

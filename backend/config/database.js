@@ -7,7 +7,7 @@ exports.connect = () => {
         
     })
     .then(() => {
-        console.log("db connected successfully"); // Log success message
+        ("db connected successfully"); // Log success message
     })
     .catch((error) => {
         console.error("db connection failed"); // Log failure message

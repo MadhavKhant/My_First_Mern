@@ -18,7 +18,6 @@ const MailSender = async (email, title, body) => {
             html: body // html body
         });
 
-        console.log("\n Email sent successfully: ", info);
         return info;
     }
     catch(error){
